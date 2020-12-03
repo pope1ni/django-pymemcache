@@ -8,6 +8,7 @@ python:
 - 3.6
 - 3.7
 - 3.8
+- 3.9
 
 cache: pip
 
@@ -21,13 +22,13 @@ matrix:
   fast_finish: true
   include:
   - env: TOXENV=flake8
-    python: 3.8
+    python: 3.9
   - env: TOXENV=isort
-    python: 3.8
+    python: 3.9
   - env: TOXENV=readme
-    python: 3.8
+    python: 3.9
   - env: TOXENV=check-manifest
-    python: 3.8
+    python: 3.9
   allow_failures:
   - env: DJANGO=master
 
@@ -45,5 +46,5 @@ deploy:
   on:
     tags: true
     repo: django-pymemcache/django-pymemcache
-    python: 3.8
+    python: 3.9
     condition: $DJANGO=3.0
