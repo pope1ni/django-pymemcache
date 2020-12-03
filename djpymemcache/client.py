@@ -46,14 +46,15 @@ class Client(HashClient):
             **kwargs
         )
 
-    def disconnect_all(self):
-        for client in self.clients.values():
-            client.close()
+    if pymemcache_version < (3, 3):
 
-    def get_many(self, keys, gets=False, *args, **kwargs):
-        # pymemcache's HashClient may returns {'key': False}
-        end = super(Client, self).get_many(keys, gets, *args, **kwargs)
+        def disconnect_all(self):
+            for client in self.clients.values():
+                client.close()
 
-        return {key: end.get(key) for key in end if end.get(key)}
+        def get_many(self, keys, gets=False, *args, **kwargs):
+            # pymemcache's HashClient may returns {'key': False}
+            end = super(Client, self).get_many(keys, gets, *args, **kwargs)
+            return {key: end.get(key) for key in end if end.get(key)}
 
-    get_multi = get_many
+        get_multi = get_many
