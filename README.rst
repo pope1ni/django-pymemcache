@@ -13,6 +13,22 @@ django-pymemcache
 django-pymemcache is a Django cache backend that uses Pinterest's
 pymemcache_ library as the backend.
 
+Built-in Backend
+----------------
+
+**If you are using Django 3.2 please use the built-in backend instead.**
+
+It is available at ``django.core.cache.backends.memcached.PyMemcacheCache``.
+
+Note that there are a few differences to the implementation provided here. The
+built-in backend passes some configuration options to the ``pymemcache`` client
+by default, specifically ``allow_unicode_keys`` is set to ``True`` and
+``default_noreply`` is set to ``False``. This is to ensure consistency with
+other backends and expected behavior in Django's cache framework.
+
+If you rely on the default behavior of this implementation, make sure you
+adjust your configuration as required when migrating to the built-in backend.
+
 Installation
 ------------
 

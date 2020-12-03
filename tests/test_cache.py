@@ -203,6 +203,7 @@ class CacheTestCase(TestCase):
             cache.set('a' * 251, 'value')
 
     @unittest.skipIf(django.VERSION < (2, 0), 'Returning failing list >=2.0')
+    @unittest.skipIf(django.VERSION >= (3, 2), 'Returning failing list >=2.0')
     def test_set_many_returns_failing_keys(self):
         # https://docs.djangoproject.com/en/2.1/releases/2.0/#cache
         with mock.patch(
