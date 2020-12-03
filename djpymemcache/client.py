@@ -1,8 +1,7 @@
+import pymemcache
 from pymemcache.client.hash import HashClient
-from pymemcache.serde import (
-    python_memcache_deserializer,
-    python_memcache_serializer,
-)
+
+pymemcache_version = tuple(map(int, pymemcache.__version__.split('.')[:3]))
 
 
 def _split_host_and_port(servers):
@@ -30,8 +29,16 @@ class Client(HashClient):
     """
 
     def __init__(self, servers, *args, **kwargs):
-        kwargs.setdefault('serializer', python_memcache_serializer)
-        kwargs.setdefault('deserializer', python_memcache_deserializer)
+        if pymemcache_version < (3, 0):
+            from pymemcache.serde import (
+                python_memcache_deserializer,
+                python_memcache_serializer,
+            )
+            kwargs.setdefault('serializer', python_memcache_serializer)
+            kwargs.setdefault('deserializer', python_memcache_deserializer)
+        else:
+            from pymemcache.serde import pickle_serde
+            kwargs.setdefault('serde', pickle_serde)
 
         super(Client, self).__init__(
             _split_host_and_port(servers),
