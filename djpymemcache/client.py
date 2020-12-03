@@ -40,11 +40,10 @@ class Client(HashClient):
             from pymemcache.serde import pickle_serde
             kwargs.setdefault('serde', pickle_serde)
 
-        super(Client, self).__init__(
-            _split_host_and_port(servers),
-            *args,
-            **kwargs
-        )
+        if pymemcache_version < (3, 4):
+            servers = _split_host_and_port(servers)
+
+        super(Client, self).__init__(servers, *args, **kwargs)
 
     if pymemcache_version < (3, 3):
 
