@@ -17,6 +17,7 @@ env:
   - DJANGO=2.2
   - DJANGO=3.0
   - DJANGO=3.1
+  - DJANGO=3.2
   - DJANGO=master
 
 matrix:
@@ -48,4 +49,4 @@ deploy:
     tags: true
     repo: django-pymemcache/django-pymemcache
     python: 3.9
-    condition: $DJANGO=3.1
+    condition: $DJANGO=3.2
