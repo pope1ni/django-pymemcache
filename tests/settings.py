@@ -23,3 +23,5 @@ CACHES = {
 }
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
