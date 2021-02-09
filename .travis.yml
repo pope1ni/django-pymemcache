@@ -27,7 +27,7 @@ matrix:
     python: 3.9
   - env: TOXENV=isort
     python: 3.9
-  - env: TOXENV=readme
+  - env: TOXENV=twine
     python: 3.9
   - env: TOXENV=check-manifest
     python: 3.9
